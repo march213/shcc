@@ -10,8 +10,8 @@ const params = {
 const two = new Two(params).appendTo(container);
 
 const shapes = [];
-const shapesCount = 12;
-const plotRadius = 150;
+const shapesCount = 100;
+const plotRadius = 50;
 const centerX = two.width / 2;
 const centerY = two.height / 2;
 
@@ -21,10 +21,11 @@ for (let i = 0; i < shapesCount; i++) {
 
   let x = Math.cos(angle) * plotRadius;
   let y = Math.sin(angle) * plotRadius;
+  const sWidth = 2;
+  const sHeight = 250;
 
-  const rect = two.makeRectangle(x, y, 50, 50);
+  const rect = two.makeRectangle(x, y, sWidth, sHeight);
   rect.fill = 'rgb(0, 220, 255)';
-  rect.opacity = 0.75;
   rect.noStroke();
   rect.rotation = angle;
 
