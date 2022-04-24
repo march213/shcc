@@ -9,37 +9,37 @@ const params = {
 
 const two = new Two(params).appendTo(container);
 
+const loopDuration = 60 * 4;
 const shapes = [];
-const shapesCount = 100;
-const plotRadius = 80;
+const shapeIncrement = 20;
+const shapesCount = 40;
+const aDelay = 1 / 120;
 const centerX = two.width / 2;
 const centerY = two.height / 2;
 
 for (let i = 0; i < shapesCount; i++) {
-  // angle: count * 2 * Math.PI / shapesCount;
-  const angle = (utils.fullRotation * i) / shapesCount;
+  const size = (shapesCount - i) * shapeIncrement;
+  const shape = two.makeRectangle(centerX, centerY, size, size);
+  if (i % 2 === 0) {
+    shape.fill = 'rgb(0, 220, 255)';
+  } else {
+    shape.fill = 'rgba(255, 255, 255, 0.7)';
+  }
 
-  let x = Math.cos(angle) * plotRadius;
-  let y = Math.sin(angle) * plotRadius;
-  const sWidth = 2;
-  const sHeight = 250;
-
-  const rect = two.makeRectangle(x, y, sWidth, sHeight);
-  rect.fill = 'rgb(0, 220, 255)';
-  rect.noStroke();
-  rect.rotation = angle;
-
-  shapes.push(rect);
+  shape.noStroke();
+  shapes.push(shape);
 }
 
-const group = two.makeGroup(shapes);
-group.translation.set(centerX, centerY);
+two.bind('update', function (frameCount) {
+  const currentFrame = frameCount % loopDuration;
+  const t = currentFrame / loopDuration;
 
-two.bind('update', function () {
-  group.rotation += 0.0025;
+  shapes.forEach((shape, i) => {
+    const aStart = aDelay * (shapesCount - i);
+    const aEnd = aDelay * i;
 
-  shapes.forEach((shape) => {
-    shape.rotation += 0.006125;
+    const u = utils.mapAndClamp(t, aStart, 1 - aEnd, 0, 1);
+    shape.rotation = utils.easeInOutCubic(u) * Math.PI;
   });
 });
 
