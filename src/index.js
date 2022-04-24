@@ -35,11 +35,17 @@ two.bind('update', function (frameCount) {
   const t = currentFrame / loopDuration;
 
   shapes.forEach((shape, i) => {
-    const aStart = aDelay * i;
-    const aEnd = aDelay * (shapesCount - i);
+    const aStart = aDelay * (shapesCount - i);
+    const aEnd = aDelay * i;
 
     const u = utils.mapAndClamp(t, aStart, 1 - aEnd, 0, 1);
-    shape.rotation = utils.easeInOutCubic(u) * Math.PI;
+    // shape.rotation = utils.easeInOutCubic(u) * Math.PI;
+
+    if (i % 2) {
+      shape.rotation = utils.easeInOutCubic(u) * Math.PI;
+    } else {
+      shape.rotation = -1 * utils.easeInOutCubic(u) * Math.PI;
+    }
   });
 });
 
