@@ -11,7 +11,7 @@ const two = new Two(params).appendTo(container);
 
 const shapes = [];
 const shapesCount = 100;
-const plotRadius = 50;
+const plotRadius = 80;
 const centerX = two.width / 2;
 const centerY = two.height / 2;
 
@@ -36,10 +36,10 @@ const group = two.makeGroup(shapes);
 group.translation.set(centerX, centerY);
 
 two.bind('update', function () {
-  group.rotation += 0.001;
+  group.rotation += 0.0025;
 
   shapes.forEach((shape) => {
-    shape.rotation += 0.001;
+    shape.rotation += 0.006125;
   });
 });
 
