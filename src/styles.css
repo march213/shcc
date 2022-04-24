@@ -1,0 +1,46 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --shadow-color: 41deg 47% 71%;
+  --shadow-elevation-low: 0.1px 0.1px 0.2px hsl(var(--shadow-color) / 0),
+    0.2px 0.2px 0.4px hsl(var(--shadow-color) / 0.16), 0.3px 0.3px 0.6px hsl(var(--shadow-color) / 0.32);
+  --shadow-elevation-medium: 0.1px 0.1px 0.2px hsl(var(--shadow-color) / 0),
+    0.4px 0.4px 0.8px hsl(var(--shadow-color) / 0.12), 0.8px 0.7px 1.6px hsl(var(--shadow-color) / 0.25),
+    1.5px 1.5px 3.2px hsl(var(--shadow-color) / 0.37);
+  --shadow-elevation-high: 0.1px 0.1px 0.2px hsl(var(--shadow-color) / 0),
+    0.7px 0.7px 1.5px hsl(var(--shadow-color) / 0.06), 1.2px 1.2px 2.5px hsl(var(--shadow-color) / 0.12),
+    1.7px 1.7px 3.6px hsl(var(--shadow-color) / 0.17), 2.4px 2.4px 5.1px hsl(var(--shadow-color) / 0.23),
+    3.3px 3.3px 7px hsl(var(--shadow-color) / 0.29), 4.6px 4.5px 9.7px hsl(var(--shadow-color) / 0.35),
+    6.3px 6.2px 13.3px hsl(var(--shadow-color) / 0.41);
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: #ffe8b4;
+}
+
+section {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 500px;
+  height: 500px;
+
+  background-color: blueviolet;
+  transform: translate(-50%, -50%);
+  box-shadow: var(--shadow-elevation-high);
+}
