@@ -11,15 +11,21 @@ const two = new Two(params).appendTo(container);
 
 const loopDuration = 60 * 4;
 const shapes = [];
+const shapeIncrement = 20;
 const shapesCount = 40;
 const aDelay = 1 / 120;
 const centerX = two.width / 2;
 const centerY = two.height / 2;
 
 for (let i = 0; i < shapesCount; i++) {
-  const shape = two.makeRectangle(centerX, i * 20, 500, 10);
+  const size = (shapesCount - i) * shapeIncrement;
+  const shape = two.makeRectangle(centerX, centerY, size, size);
+  if (i % 2 === 0) {
+    shape.fill = 'rgb(0, 220, 255)';
+  } else {
+    shape.fill = 'rgba(255, 255, 255, 0.7)';
+  }
 
-  shape.fill = 'rgb(0, 220, 255)';
   shape.noStroke();
   shapes.push(shape);
 }
@@ -33,7 +39,12 @@ two.bind('update', function (frameCount) {
     const aEnd = aDelay * i;
 
     const u = utils.mapAndClamp(t, aStart, 1 - aEnd, 0, 1);
-    shape.rotation = utils.easeInOutCubic(u) * Math.PI;
+
+    if (i % 2) {
+      shape.rotation = utils.easeInOutCubic(u) * Math.PI;
+    } else {
+      shape.rotation = -1 * utils.easeInOutCubic(u) * Math.PI;
+    }
   });
 });
 
