@@ -46,6 +46,7 @@ two.bind('update', function (frameCount) {
     }
 
     shape.width = shapeMin + shapeDiff * utils.easeInOutCubic(u);
+    shape.translation.x = (shapeMax / 2 + shapeMax) * utils.easeInOutCubic(u);
   });
 });
 
