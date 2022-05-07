@@ -29,9 +29,11 @@ for (let i = 0; i < shapesCount; i++) {
   shapes.push(shape);
 }
 
+let t = 0.35;
+
 two.bind('update', function (frameCount) {
-  const currentFrame = frameCount % loopDuration;
-  const t = currentFrame / loopDuration;
+  // const currentFrame = frameCount % loopDuration;
+  // const t = currentFrame / loopDuration;
 
   shapes.forEach((shape, i) => {
     const aStart = aDelay * (shapesCount - i);
@@ -48,6 +50,10 @@ two.bind('update', function (frameCount) {
     shape.width = shapeMin + shapeDiff * utils.easeInOutCubic(u);
     shape.translation.x = (shapeMax / 2 + shapeMax) * utils.easeInOutCubic(u);
   });
+});
+
+document.addEventListener('mousemove', (event) => {
+  t = utils.mapAndClamp(event.pageX, 0, two.width, 0, 1);
 });
 
 two.play();
