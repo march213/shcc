@@ -19,7 +19,6 @@ const shapeDiff = shapeMax - shapeMin;
 
 const aDelay = 1 / 120;
 const centerX = two.width / 2;
-const centerY = two.height / 2;
 
 for (let i = 0; i < shapesCount; i++) {
   const shape = two.makeRectangle(centerX, i * 20, 500, 10);
@@ -32,9 +31,6 @@ for (let i = 0; i < shapesCount; i++) {
 let t = 0.35;
 
 two.bind('update', function (frameCount) {
-  // const currentFrame = frameCount % loopDuration;
-  // const t = currentFrame / loopDuration;
-
   shapes.forEach((shape, i) => {
     const aStart = aDelay * (shapesCount - i);
     const aEnd = aDelay * i;
@@ -52,8 +48,11 @@ two.bind('update', function (frameCount) {
   });
 });
 
-document.addEventListener('mousemove', (event) => {
-  t = utils.mapAndClamp(event.pageX, 0, two.width, 0, 1);
+document.addEventListener('scroll', (event) => {
+  const scrollY = window.pageYOffset;
+  const scrollMax = document.body.scrollHeight - window.innerHeight;
+
+  t = utils.mapAndClamp(scrollY, 0, scrollMax, 0, 1);
 });
 
 two.play();
